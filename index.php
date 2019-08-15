@@ -25,7 +25,7 @@
             <div class="col-lg-4 offset-lg-4" id="alerta">
                 <div class="alert alert-success text-center">
                     <strong id="resultado">
-                        Maravilhoso mundo sem o Sublime!
+                      
                     </strong>
                 </div>
             </div>
@@ -35,7 +35,7 @@
         <section class="row mb-5">
             <div class="col-lg-4 offset-lg-4 bg-light rounded" id="caixaLogin">
                 <h2 class="text-center mt-2">Entrada no sistema</h2>
-                <form action="#" id="formLogin" class="p-2">
+                <form id="formLogin" class="p-2">
 
                     <div class="form-group">
                         <input type="text" name="nomeUsuario" id="nomeUsuario" class="form-control" placeholder="Nome do usuário" minlength="5" required>
@@ -164,6 +164,28 @@
     <script>
         /* jQuery */
         $(function() {
+            $('#btnEntrar').click(function(e) {
+                let formLogin = document.querySelector("#formLogin");
+                if(formLogin.checkValidity(){
+                    e.preventdDefault();//n recarregar a pg
+                    $.ajax({
+                        url: 'recebe.php',
+                        method: 'post',
+                        data: $('#formLogin').serialize()+'&action=login',
+                        success: function(resposta){
+                            $('#alerta').show();
+                            $('#resultado').html(resposta);
+
+                        }
+                                            });
+                })
+            });
+
+
+            $('btnRegistrar').click();
+
+
+            $('btnEnviarEmail').click();
 
             //Trocar da Tela de Login para Recuperar Senha
             $("#btnEsqueci").click(function() {
@@ -196,8 +218,8 @@
 
             $("#formCadastro").validate(
                 rules: {
-                    senhaConfirma:{
-                        equaLto:"#senhaUsúario"
+                    senhaConfirma: {
+                        equaLto: "#senhaUsúario"
                     }
                 }
             );
