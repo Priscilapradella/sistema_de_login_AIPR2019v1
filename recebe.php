@@ -26,7 +26,9 @@ $_POST['action'] == 'login'){
 
     $busca = $sql->fetch();
         if($busca != null){
-            echo "Usuário e senha conferem!";
+            $_SESSION['nomeUsuario'] = $nomeUsuario;
+            echo "ok";
+
 }else{
             echo "Usuário e senha não conferem";
         }
