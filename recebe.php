@@ -1,4 +1,8 @@
 <?php
+
+session_start();
+
+
 require_once "configDB.php";
 
 function verificar_entrada($entrada){
@@ -9,7 +13,26 @@ function verificar_entrada($entrada){
 }
 
 
-if(isset($_POST['action']) && $_POST['action'] == 'cadastro'){
+if(isset($_POST['action']) &&
+$_POST['action'] == 'login'){
+    $nomeUsuario = verificar_entrada($_POST['nomeUsuario']);
+    $senhaUsuario = verificar_entrada($_POST['senhaUsuario']);
+    $senha = sha1($senhaUsuario);
+    //echo "<br>Usuário: $nomeUsuario - <br> senha: $senha";
+    $sql = $conecta->prepare("SELECT * FROM usuario WHERE
+    nomeUsuario = ? AND senha = ?");
+    $sql->bind_param("ss", $nomeUsuario, $senha);
+    $sql->execute();
+
+    $busca = $sql->fetch();
+        if($busca != null){
+            echo "Usuário e senha conferem!";
+}else{
+            echo "Usuário e senha não conferem";
+        }
+}else if (isset($_POST['action']) &&
+$_POST['action'] == 'cadastro'){
+
         $nomeCompleto = verificar_entrada($_POST['nomeCompleto']);
         $nomeUsuario = verificar_entrada($_POST['nomeUsuário']);
         $emailUsuario = verificar_entrada($_POST['emailUsuário']);
