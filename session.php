@@ -14,7 +14,12 @@ if (isset($_SESSION['nomeUsuario'])) {
     $linha = $resultado->fetch_array(MYSQLI_ASSOC);
     $nome = $linha['nome'];
     $email = $linha['email'];
-    $dataCriacao = $linha['dataCriacao'];
+
+    $d = $linha['dataCriacao'];
+    $d = new DateTime($d);
+    $dataCriacao = $d->format('d/m/Y/ H:i:s');
+
+    $urlAvatar = $linha['avatar'];
 } else {
     //Kick
     header("location: index.php");

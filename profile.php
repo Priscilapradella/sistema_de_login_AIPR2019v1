@@ -20,7 +20,7 @@ require_once 'session.php';
 <body class="bg-dark">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">TNX Systems</a>
+        <a class="navbar-brand" href="#">Pri Systems</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -50,10 +50,18 @@ require_once 'session.php';
     </nav>
 
     <main class="container mt-4">
-        <h1 class="text-light">Perfil de usuário</h1>
-        <h2 class="text-light">Nome: <?= $nome ?></h2>
-        <h2 class="text-light">E-mail: <?= $email ?></h2>
-        <h2 class="text-light">Data de Cadastro: <?= $dataCriacao ?></h2>
+        <div class="row">
+            <div class="offset-lg-2 col-3">
+                <img src="<?= $urlAvatar ?>" alt="Foto de <?= $usuario ?> " />
+            </div>
+
+            <div class="col-7">
+
+                <h1 class="text-light">Perfil de usuário</h1>
+                <h2 class="text-light">Nome: <?= $nome ?></h2>
+                <h2 class="text-light">E-mail: <?= $email ?></h2>
+                <h2 class="text-light">Data de Cadastro: <?= $dataCriacao ?></h2>
+            </div>
     </main>
 
     <!-- Optional JavaScript -->
@@ -63,19 +71,6 @@ require_once 'session.php';
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
-<form action="/pagina-processa-dados-do-form" method="post">
-    <div>
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" />
-    </div>
-    <div>
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" />
-    </div>
-    <div>
-        <label for="msg">Mensagem:</label>
-        <textarea id="msg"></textarea>
-    </div>
-</form>
+
 
 </html>

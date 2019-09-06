@@ -94,6 +94,12 @@ if (isset($_SESSION['nomeUsuario']))
                     </div>
 
                     <div class="form-group">
+                        <input type="url" name="urlAvatar" id="urlAvatar" class="form-control"
+                        placeholder="URL para imagem do seu perfil" required>
+                    </div>
+
+
+                    <div class="form-group">
                         <input type="email" name="emailUsuário" id="emailUsuário" class="form-control" placeholder="E-mail de Usuário" required>
                     </div>
 
@@ -104,6 +110,7 @@ if (isset($_SESSION['nomeUsuario']))
                     <div class="form-group">
                         <input type="password" name="senhaConfirma" id="senhaConfirma" class="form-control" placeholder="Confirme a sua senha" required minlength="6">
                     </div>
+
 
                     <div class="form-group mt-5">
                         <div class="custom-control custom-checkbox">

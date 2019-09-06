@@ -43,7 +43,8 @@ if (
     $emailUsuario = verificar_entrada($_POST['emailUsuário']);
     $senhaUsuario = verificar_entrada($_POST['senhaUsuário']);
     $senhaConfirma = verificar_entrada($_POST['senhaConfirma']);
-    $concordar = $_POST['concordar'];
+    $urlAvatar = verificar_entrada($_POST['urlAvatar']);
+    //$concordar = $_POST['concordar'];
     $dataCriacao = date("Y-m-d H:i:s");
 
     //Hash de senha / Codificação de senha em 40 caracteres
@@ -68,15 +69,17 @@ if (
             echo "<p>E-mail já em uso, tente outro</p>";
         } else { //Cadastro de usuário
             $sql = $conecta->prepare("INSERT into usuario 
-            (nome, nomeUsuario, email, senha, dataCriacao) 
-            values(?, ?, ?, ?, ?)");
+            (nome, nomeUsuario, email, senha, dataCriacao, avatar) 
+            values(?, ?, ?, ?, ?, ?)");
             $sql->bind_param(
-                "sssss",
+                "ssssss",
                 $nomeCompleto,
                 $nomeUsuario,
                 $emailUsuario,
                 $senha,
-                $dataCriacao
+                $dataCriacao,
+                $urlAvatar
+
             );
             if ($sql->execute()) {
                 echo "<p>Registrado com sucesso</p>";
