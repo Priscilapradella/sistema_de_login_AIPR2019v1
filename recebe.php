@@ -1,3 +1,4 @@
+Learn more or give us feedback
 <?php
 //Inicializando a sessão
 session_start();
@@ -29,6 +30,24 @@ if (
         //Colocando o nome do usuário na Sessão
         $_SESSION['nomeUsuario'] = $nomeUsuario;
         echo "ok";
+        if (!empty($_POST['lembrar'])) {
+            //Se não estiver vazio
+            //Armazenar Login e Senha no Cookie
+            setcookie(
+                "nomeUsuario",
+                $nomeUsuario,
+                time() + (30 * 24 * 60 * 60)
+            );
+            setcookie(
+                "senhaUsuario",
+                $senhaUsuario,
+                time() + (30 * 24 * 60 * 60)
+            ); //30 dias em segundos
+        } else {
+            //Se estiver vazio
+            setcookie("nomeUsuario", "");
+            setcookie("senhaUsuario", "");
+        }
     } else {
         echo "usuário e senha não conferem!";
     }
@@ -69,7 +88,8 @@ if (
             echo "<p>E-mail já em uso, tente outro</p>";
         } else { //Cadastro de usuário
             $sql = $conecta->prepare("INSERT into usuario 
-            (nome, nomeUsuario, email, senha, dataCriacao, avatar) 
+            (nome, nomeUsuario, email, senha, dataCriacao, 
+            avatar_url) 
             values(?, ?, ?, ?, ?, ?)");
             $sql->bind_param(
                 "ssssss",
@@ -79,7 +99,6 @@ if (
                 $senha,
                 $dataCriacao,
                 $urlAvatar
-
             );
             if ($sql->execute()) {
                 echo "<p>Registrado com sucesso</p>";
