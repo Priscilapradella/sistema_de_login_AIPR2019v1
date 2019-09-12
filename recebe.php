@@ -1,4 +1,3 @@
-Learn more or give us feedback
 <?php
 //Inicializando a sessão
 session_start();
@@ -89,7 +88,7 @@ if (
         } else { //Cadastro de usuário
             $sql = $conecta->prepare("INSERT into usuario 
             (nome, nomeUsuario, email, senha, dataCriacao, 
-            avatar_url) 
+            avatar) 
             values(?, ?, ?, ?, ?, ?)");
             $sql->bind_param(
                 "ssssss",
