@@ -12,6 +12,36 @@ function verificar_entrada($entrada)
 }
 if (
     isset($_POST['action']) &&
+    $_POST['action'] == 'senha'
+) {
+    //Apenas para bug / Teste
+    //echo "<strong>Recuperação de Senha </strong>";
+
+    $emailSenha = verificar_entrada($_POST['emailSenha']);
+    $sql = $conecta->prepare("SELECT idUsuario FROM usuario WHERE email = ?");
+    $sql->bind_param("s", $emailSenha);
+    $sql->execute();
+    $resultado = $sql->get_result();
+    if ($resultado->num_rows > 0) {
+        //Existe o usuário no Banco de Dados
+        //echo "<p class= \"text-sucess\"> E-mail encontrado</p>";
+        $frase = "BatAtinh4Quando123456NascexexeEsparr4maPeloChao";
+        $frase_secreta = str_shuffle($frase);
+        $token = substr($frase_secreta, 0, 10);
+        //echo"<p>$token</p>"; 
+        $sql = $conecta->prepare("UPDATE usuario SET token = ?, tempo_de_vida = DATE_ADD(NOW(),
+            INTERVAL 1 MINUTE) WHERE email = ?");
+        $sql->bind_param("ss", $token, $emailSenha);
+        $sql->execute();
+        //Criação do Link para gerar Nova Senha
+        $link = "<a href=\"gerar_senha.php?token=$token\">Clique aqui para gerar uma nova senha</a>";
+        //Este link eve ser enviado para o e-mail
+        echo $link;
+    } else {
+        echo '<p class="text-danger"> E-mail não encontrado</p>';
+    }
+} else if (
+    isset($_POST['action']) &&
     $_POST['action'] == 'login'
 ) {
     //Verificação e Login do usuário
